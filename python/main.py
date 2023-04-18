@@ -1,38 +1,24 @@
-import time
-import transcription
-import troubleshooting
+from transcription import Transcriber
+from troubleshooting import Troubleshooter
 from audio_recorder import AudioRecorder
 
-# Transcribe audio to text
-def process_audio(file_path):
-    transcribed_text = transcription.transcribe_audio(file_path)
-    print("Transcribed Text:", transcribed_text)
+class Assistant:
+    def __init__(self):
+        self.transcriber = Transcriber()
+        self.troubleshooter = Troubleshooter()
 
-    # Detect pauses and get troubleshooting suggestions
-    pause_duration = 1.5
-    transcription_start_time = time.time()
-    last_word_timestamp = None
-    words = []
+    def process_audio(self, file_path):
+        transcribed_text = self.transcriber.transcribe_audio(file_path)
 
-    for word in transcribed_text.split():
-        current_time = time.time()
-        if last_word_timestamp and current_time - last_word_timestamp > pause_duration:
-            print("User:", ' '.join(words))
-            suggestion = troubleshooting.get_troubleshooting_suggestion(' '.join(words))
+        user_text = transcribed_text.strip()
+        if user_text:
+            print("User:", user_text)
+            suggestion = self.troubleshooter.get_troubleshooting_suggestion(user_text)
             print("Troubleshooting Suggestion:", suggestion)
-            words = []
-        words.append(word)
-        last_word_timestamp = current_time
-
-    # Final suggestion after the last pause or end of the transcription
-    if words:
-        print("User:", ' '.join(words))
-        suggestion = troubleshooting.get_troubleshooting_suggestion(' '.join(words))
-        print("Troubleshooting Suggestion:", suggestion)
 
 if __name__ == "__main__":
+    assistant = Assistant()
     audio_recorder = AudioRecorder()
-    audio_recorder.record_audio()
-    audio_file = audio_recorder.get_saved_audio_path()
+    audio_file = audio_recorder.record_audio() #record_audio returns a file path, will work on a better implementation soon
     if audio_file:
-        process_audio(audio_file)
+        assistant.process_audio(audio_file)
