@@ -31,9 +31,7 @@ class AudioRecorder:
     def save_audio(self, file_name):
         sf.write(file_name, np.array(self.audio_buffer), self.RATE)
 
-    def record_audio(self, duration=None):
-        start_time = time.time()
-        file_name = f"audio/audio_{start_time}_{datetime.datetime.now().strftime('%Y-%m-%d')}.wav"
+    def record_audio(self, duration=None, outputfile= f"audio/audio_{time.time()}_{datetime.datetime.now().strftime('%Y-%m-%d')}.wav"):
         
         try:
             self.stream.start_stream()
@@ -49,8 +47,8 @@ class AudioRecorder:
         self.stream.close()
         self.audio.terminate()
 
-        self.save_audio(file_name)
+        self.save_audio(outputfile)
         self.audio_buffer.clear()
 
-        return file_name
+        return outputfile
 
