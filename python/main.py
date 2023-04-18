@@ -1,13 +1,9 @@
-from flask import Flask, request
-from twilio.twiml.voice_response import VoiceResponse, Gather
 from transcription import Transcriber
 from troubleshooting import Troubleshooter
 from audio_recorder import AudioRecorder
 from text_to_speech import TextToSpeech
 from pydub import AudioSegment
 from pydub.playback import play
-
-app = Flask(__name__)
 
 class Assistant:
     def __init__(self):
@@ -32,9 +28,6 @@ class Assistant:
             audio = AudioSegment.from_mp3(output_file)
             play(audio)
             pass
-
-
-
 
 if __name__ == "__main__":
     assistant = Assistant()
