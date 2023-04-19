@@ -29,9 +29,10 @@ class AudioRecorder:
         return (in_data, pyaudio.paContinue)
 
     def save_audio(self, file_name):
-        sf.write(file_name, np.array(self.audio_buffer), self.RATE)
+        sf.write(file_name, np.array(self.audio_buffer), self.RATE, format="WAV")
 
     def record_audio(self, duration=None, outputfile= f"audio/audio_{time.time()}_{datetime.datetime.now().strftime('%Y-%m-%d')}.wav"):
+        start_time = time.time()
         
         try:
             self.stream.start_stream()

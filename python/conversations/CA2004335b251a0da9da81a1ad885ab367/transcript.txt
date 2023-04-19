@@ -1,0 +1,22 @@
+
+User: Hi.
+AI: Hello! How can I assist you today?
+User: Can you give me a cake recipe?
+AI: Certainly! Here's a basic recipe for a vanilla cake:
+Ingredients:
+- 2 1/4 cups all-purpose flour
+- 1 1/2 cups granulated sugar
+- 3 1/2 tsp baking powder
+- 1 tsp salt
+- 1/2 cup unsalted butter, softened
+- 1 cup milk
+- 2 tsp vanilla extract
+- 3 large eggs
+Directions:
+1. Preheat oven to 350°F. Grease and flour two 9-inch round cake pans.
+2. In a large bowl, whisk together flour, sugar, baking powder, and salt.
+3. Add butter, milk, and vanilla; beat with an electric mixer on low speed for 1 minute.
+4. Add eggs; beat on low speed 2 minutes.
+5. Pour batter evenly into pans.
+6. Bake for 25-30 minutes, or until a toothpick inserted in the center comes out clean.
+7. Allow cakes to cool completely in pans, then remove from pans and frost as desired. Is there anything else you need help with?

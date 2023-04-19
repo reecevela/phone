@@ -1,0 +1,7 @@
+
+User: Tell me a joke.
+AI: Why don't scientists trust atoms? Because they make up everything.
+User: Tell me that joke again.
+AI: Why don't scientists trust atoms? Because they make up everything.
+User: Okay, bye.
+AI: Goodbye!

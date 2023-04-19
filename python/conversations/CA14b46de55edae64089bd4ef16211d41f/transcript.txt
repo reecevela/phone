@@ -1,0 +1,26 @@
+
+User: Can you give me a cake recipe?
+AI: Yes, here is a simple cake recipe: 
+Ingredients:
+- 1 and 1/2 cups of all-purpose flour
+- 1 tsp of baking powder
+- 1/2 tsp of baking soda
+- 1/2 cup of unsalted butter, softened
+- 3/4 cup of granulated sugar
+- 2 large eggs
+- 1 tsp of vanilla extract
+- 1/2 cup of milk
+
+Directions:
+1. Preheat the oven to 350°F (180°C).
+2. Grease a 9-inch cake pan or line it with parchment paper.
+3. In a medium bowl, whisk together the flour, baking powder, and baking soda.
+4. In a larger bowl, cream the butter and sugar until light and fluffy.
+5. Beat in the eggs and vanilla extract.
+6. Gradually mix in the dry ingredients into the wet mixture, alternating with the milk, until everything is combined.
+7. Pour the cake batter into the prepared pan and bake for 25-30 minutes or until a toothpick comes out clean when inserted into the center.
+8. Let the cake cool completely in the pan before removing it and decorating.
+
+Do you have any other questions about the recipe?
+User: Yeah, how much sugar was in it?
+AI: The recipe calls for 3/4 cup of granulated sugar. Is there anything else you would like to know about the recipe?

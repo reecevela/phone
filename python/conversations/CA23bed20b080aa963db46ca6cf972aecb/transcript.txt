@@ -1,0 +1,7 @@
+
+User: Can you tell me a joke?
+AI: Why was the math book sad? Because it had too many problems... Do you want to hear another one?
+User: No.
+AI: Is there anything else I can assist you with?
+User: Thank you.
+AI: Is there anything else I can help you with?
