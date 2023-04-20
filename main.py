@@ -35,7 +35,7 @@ def start_call():
     session['call_sid'] = call_sid
 
     response = VoiceResponse()
-    response.say("Hi, I'm your personal AI assistant. This call may be recorded. How can I help you today?")
+    response.say("Hi, I'm Ruby the AI! How can I help you today?")
     gather = Gather(input='speech', action='/process_speech', speechTimeout="auto", speechModel="phone_call")
     response.append(gather)
     response.redirect('/process_speech')
@@ -66,8 +66,13 @@ def process_speech():
         user_text = request.form.get("SpeechResult")
 
         if not user_text:
+
+            # If the user didn't say anything, log it in the transcript.txt file
+            with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "a") as f:
+                f.write(f"\nUser: *pauses* \nAI: I'm sorry, I didn't quite catch that.")
+
             response = VoiceResponse()
-            response.say("I'm sorry, I didn't quite catch that. How may I help you today?")
+            response.say("I'm sorry, I didn't quite catch that.")
             gather = Gather(input='speech', speechTimeout='auto', action='/process_speech', method='POST', speechModel="phone_call")
             response.append(gather)
             response.redirect(f'/process_speech')

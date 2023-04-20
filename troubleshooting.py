@@ -11,7 +11,7 @@ class Troubleshooter:
         response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "You are a helpful AI assistant, specialized in troubleshooting. Answer as concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue. End with a question or clarification when it makes sense."},
+                {"role": "system", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."},
                 {"role": "user", "content": text}
             ]
         )
