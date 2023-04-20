@@ -1,4 +1,5 @@
 from flask import Flask, request, send_from_directory, session, send_file
+from flask_session import Session
 from twilio.twiml.voice_response import Gather, VoiceResponse
 from transcription import Transcriber
 from troubleshooting import Troubleshooter
@@ -6,6 +7,11 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+# Configure session to use filesystem (instead of signed cookies)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_FILE_DIR'] = './sessions'
+Session(app)
 
 class Assistant:
     def __init__(self, call_sid):
