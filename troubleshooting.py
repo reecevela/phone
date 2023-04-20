@@ -9,7 +9,7 @@ class Troubleshooter:
 
     def get_troubleshooting_suggestion(self, text):
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."},
                 {"role": "user", "content": text}
