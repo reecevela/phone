@@ -35,7 +35,7 @@ def start_call():
     session['call_sid'] = call_sid
 
     response = VoiceResponse()
-    response.say("Hi how can I help you?")
+    response.say("Hi, I'm your personal AI assistant. This call may be recorded. How can I help you today?")
     gather = Gather(input='speech', action='/process_speech', speechTimeout="4", speechModel='default')
     response.append(gather)
     response.redirect('/process_speech')
@@ -68,7 +68,7 @@ def process_speech():
         if not user_text:
             response = VoiceResponse()
             response.say("I'm sorry, I didn't quite catch that. Please try again.")
-            gather = Gather(input='speech', timeout=3, action='/process_speech', method='POST')
+            gather = Gather(input='speech', timeout=2, action='/process_speech', method='POST')
             response.append(gather)
             response.redirect(f'/process_speech')
             return str(response)
@@ -85,7 +85,7 @@ def process_speech():
         response = VoiceResponse()
         response.say(suggestion)
 
-        gather = Gather(input='speech', timeout=3, action='/process_speech', method='POST')
+        gather = Gather(input='speech', timeout=2, action='/process_speech', method='POST')
         response.append(gather)
         response.redirect(f'/process_speech')
 
