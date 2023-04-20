@@ -67,7 +67,7 @@ def process_speech():
 
         if not user_text:
             response = VoiceResponse()
-            response.say("I'm sorry, I didn't quite catch that. Please try again.")
+            response.say("I'm sorry, I didn't quite catch that. How may I help you today?")
             gather = Gather(input='speech', speechTimeout='auto', action='/process_speech', method='POST', speechModel="phone_call")
             response.append(gather)
             response.redirect(f'/process_speech')
