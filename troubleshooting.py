@@ -11,7 +11,7 @@ class Troubleshooter:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful AI assistant, specialized in troubleshooting. Answer as concisely as you possibly can. Answer only in sentences. In a list of steps, only give one step per response. End with a question or clarification."},
+                {"role": "system", "content": "You are a helpful AI assistant, specialized in troubleshooting. Answer as concisely as you possibly can. Answer only in sentences. Do not say 'AI'. In a list of steps, only give one step per response. End with a question or clarification."},
                 {"role": "user", "content": text}
             ]
         )
