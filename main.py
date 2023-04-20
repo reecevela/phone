@@ -77,7 +77,7 @@ def process_speech():
         response = VoiceResponse()
         response.say(suggestion)
 
-        gather = Gather(input='speech', timeout=0.8, action='/process_speech', method='POST')
+        gather = Gather(input='speech', timeout=1, action='/process_speech', method='POST')
         response.append(gather)
         response.redirect(f'/process_speech')
 
