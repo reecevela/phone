@@ -60,6 +60,8 @@ def process_speech():
         if os.path.exists(os.path.join(f"conversations/{call_sid}", "transcript.txt")):
             with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "r") as f:
                 history = f.read()
+                # Only keep last 1000 characters to keep API calls fast
+                history = history[-1000:]
         else:
             history = ""
 
