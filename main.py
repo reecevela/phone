@@ -6,7 +6,6 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-base_url = "https://5060-66-207-31-200.ngrok-free.app" # Replace with your ngrok URL
 
 class Assistant:
     def __init__(self, call_sid):
