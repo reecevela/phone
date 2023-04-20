@@ -65,6 +65,14 @@ def process_speech():
 
         user_text = request.form.get("SpeechResult")
 
+        if not user_text:
+            response = VoiceResponse()
+            response.say("I'm sorry, I didn't quite catch that. Please try again.")
+            gather = Gather(input='speech', timeout=2, action='/process_speech', method='POST')
+            response.append(gather)
+            response.redirect(f'/process_speech')
+            return str(response)
+
         context = history + " " + user_text
 
         # Process the audio and get the suggestion
