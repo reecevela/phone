@@ -68,7 +68,7 @@ def process_speech():
         if not user_text:
             response = VoiceResponse()
             response.say("I'm sorry, I didn't quite catch that. Please try again.")
-            gather = Gather(input='speech', timeout=2, action='/process_speech', method='POST')
+            gather = Gather(input='speech', timeout=3, action='/process_speech', method='POST')
             response.append(gather)
             response.redirect(f'/process_speech')
             return str(response)
@@ -85,7 +85,7 @@ def process_speech():
         response = VoiceResponse()
         response.say(suggestion)
 
-        gather = Gather(input='speech', timeout=1, action='/process_speech', method='POST')
+        gather = Gather(input='speech', timeout=3, action='/process_speech', method='POST')
         response.append(gather)
         response.redirect(f'/process_speech')
 
