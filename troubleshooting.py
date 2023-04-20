@@ -9,9 +9,9 @@ class Troubleshooter:
 
     def get_troubleshooting_suggestion(self, text):
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful AI assistant, specialized in troubleshooting. Answer as concisely as you possibly can. Answer only in sentences. End with a question or clarification."},
+                {"role": "system", "content": "You are a helpful AI assistant, specialized in troubleshooting. Answer as concisely as you possibly can. Answer only in sentences. In a list of steps, only give one step per response. End with a question or clarification."},
                 {"role": "user", "content": text}
             ]
         )
