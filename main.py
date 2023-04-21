@@ -57,7 +57,7 @@ def process_speech():
             os.makedirs(f"conversations/{call_sid}")
       
         #if transcript file exists, read it
-        limit = 6
+        limit = 8
 
         if os.path.exists(os.path.join(f"conversations/{call_sid}", "transcript.txt")):
             with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "r") as f:
