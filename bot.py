@@ -12,7 +12,7 @@ class Bot:
         combined = [{"role": "user", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."}] + conversation
         response = openai.ChatCompletion.create(
             model="gpt-4",
-            max_tokens = 1024,
+            max_tokens = 800,
             messages=combined
         )
         return response['choices'][0]['message']['content']
@@ -21,7 +21,7 @@ class Bot:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "user", "content": "Summarize the following text."},
+                {"role": "user", "content": "Shorten the following text."},
                 {"role": "user", "content": text},
             ]
         )
