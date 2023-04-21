@@ -8,8 +8,8 @@ class Bot:
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
     def get_suggestion(self, conversation):
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        response = openai.Completion.create(
+            model="gpt-4",
             max_tokens = 1024,
             messages=[
                 {"role": "system", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."}
