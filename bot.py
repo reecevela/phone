@@ -8,12 +8,11 @@ class Bot:
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
     def get_suggestion(self, conversation):
+        combined = [{"role": "user", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."}, conversation]
         response = openai.Completion.create(
             model="gpt-4",
             max_tokens = 1024,
-            messages=[
-                {"role": "system", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."}
-            ] + conversation
+            messages=combined
         )
         return response['choices'][0]['message']['content']
     
