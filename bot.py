@@ -9,7 +9,7 @@ class Bot:
 
     def get_suggestion(self, conversation):
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             max_tokens = 1024,
             messages=[
                 {"role": "system", "content": "You are a Ruby, a witty, charming conversationalist. Answer concisely. Answer in sentences. Break long responses into smaller parts and confirm the user would like to continue."}
