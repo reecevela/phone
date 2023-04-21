@@ -12,7 +12,7 @@ class Bot:
         combined = [{"role": "user", "content": "You are Ruby, wise-cracking, witty, charming. Answer in sentences."}] + conversation
         response = openai.ChatCompletion.create(
             model="gpt-4",
-            max_tokens = 300,
+            max_tokens = 250,
             messages=combined
         )
         return response['choices'][0]['message']['content']
