@@ -4,6 +4,7 @@ from twilio.twiml.voice_response import Gather, VoiceResponse
 from transcription import Transcriber
 from troubleshooting import Troubleshooter
 import os
+import json
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -19,11 +20,9 @@ class Assistant:
         self.transcriber = Transcriber()
         self.troubleshooter = Troubleshooter()
 
-    def process_audio(self, transcribed_text):
-        user_text = transcribed_text.strip()
-        if user_text:
-            print("User:", user_text)
-            suggestion = self.troubleshooter.get_troubleshooting_suggestion(user_text)
+    def process_audio(self, conversation):
+        if conversation:
+            suggestion = self.troubleshooter.get_troubleshooting_suggestion(conversation)
             print("Troubleshooting Suggestion:", suggestion)
             return suggestion
 
@@ -35,7 +34,7 @@ def start_call():
     session['call_sid'] = call_sid
 
     response = VoiceResponse()
-    response.say("Hi, I'm Ruby the AI! How can I help you today?")
+    response.say("Hi, I'm Ruby the AI! If I get stuck, just say the continue. How can I help you today?")
     gather = Gather(input='speech', action='/process_speech', speechTimeout="auto", speechModel="phone_call")
     response.append(gather)
     response.redirect('/process_speech')
@@ -59,11 +58,10 @@ def process_speech():
         #if transcript file exists, read it
         if os.path.exists(os.path.join(f"conversations/{call_sid}", "transcript.txt")):
             with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "r") as f:
-                history = f.read()
-                # Only keep last 1000 characters to keep API calls fast
-                history = history[-1000:]
+                lines = f.readlines()
+                conversation = [json.loads(line) for line in lines]
         else:
-            history = ""
+            conversation = []
 
         user_text = request.form.get("SpeechResult")
 
@@ -79,15 +77,19 @@ def process_speech():
             response.append(gather)
             response.redirect(f'/process_speech')
             return str(response)
-
-        context = history + " " + user_text
+        
+        # Add the user message to the conversation
+        conversation.append({"role": "user", "content": user_text})
 
         # Process the audio and get the suggestion
-        suggestion = assistants[call_sid].process_audio(context)
+        suggestion = assistants[call_sid].process_audio(conversation)
 
         # Save the user and AI messages in the transcript.txt file
+        user_message = {"role": "user", "content": user_text}
+        ai_message = {"role": "system", "content": suggestion}
         with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "a") as f:
-            f.write(f"\nUser: {user_text}\nAI: {suggestion}")
+            f.write(json.dumps(user_message) + "\n")
+            f.write(json.dumps(ai_message) + "\n")
 
         response = VoiceResponse()
         response.say(suggestion)
