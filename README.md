@@ -14,6 +14,7 @@ AIPhone is designed to handle incoming phone calls, understand the user's speech
 - Utilizing the GPT-4 model to provide intelligent and context-aware troubleshooting suggestions.
 - Maintaining conversation history for a better understanding of user issues and providing relevant responses.
 - Handling speech recognition and text-to-speech using the Twilio API.
+- Conversation history
 
 ### Future Plans
 In future iterations of AIPhone, I plan to add the following features:
@@ -22,7 +23,6 @@ In future iterations of AIPhone, I plan to add the following features:
 - Fix delay after user talks
 - Smarter AI model - currently on GPT-3.5-turbo for performance, using GPT-4 caused timeouts because it takes longer to process
 - Web Portal
-- Conversation history
 - Integration with aiitsupport.net for business-specific troubleshooting and documentation
 - Hand-off or automatic hangup when call is over
 
