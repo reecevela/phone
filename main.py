@@ -35,7 +35,7 @@ def start_call():
     session['call_sid'] = call_sid
 
     response = VoiceResponse()
-    response.say("Hi, I'm Ruby the AI! If I get stuck, just say continue. How can I help you today?")
+    response.say("Hi, I'm Ruby the AI! How can I help you today?")
     gather = Gather(input='speech', action='/process_speech', speechTimeout="auto", speechModel="phone_call")
     response.append(gather)
     response.redirect('/process_speech')
