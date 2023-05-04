@@ -52,53 +52,31 @@ def process_speech():
         if call_sid not in assistants:
             assistants[call_sid] = Assistant(call_sid)
 
-        # Create a folder for the conversation
-        if not os.path.exists(f"conversations/{call_sid}"):
-            os.makedirs(f"conversations/{call_sid}")
-      
-        #if transcript file exists, read it
-        limit = 10
-
-        if os.path.exists(os.path.join(f"conversations/{call_sid}", "transcript.txt")):
-            with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "r") as f:
-                lines = f.readlines()
-                conversation = [json.loads(line) for line in lines[-limit:]]
-        else:
-            conversation = []
-
         user_text = request.form.get("SpeechResult")
 
         if not user_text:
-
-            # If the user didn't say anything, log it in the transcript.txt file
-            user_message = {"role": "user", "content": "No speech detected."}
-            ai_message = {"role": "system", "content": "I'm sorry, I didn't quite catch that."}
-            with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "a") as f:
-                f.write(json.dumps(user_message) + "\n")
-                f.write(json.dumps(ai_message) + "\n")
-
             response = VoiceResponse()
             response.say("I'm sorry, I didn't quite catch that.")
             gather = Gather(input='speech', speechTimeout='auto', action='/process_speech', method='POST', speechModel="phone_call")
             response.append(gather)
             response.redirect(f'/process_speech')
             return str(response)
-        
+
         # Add the user message to the conversation
-        conversation.append({"role": "user", "content": user_text})
+        conversation = [{"role": "user", "content": user_text}]
 
         # Process the audio and get the suggestion
         suggestion = assistants[call_sid].process_audio(conversation)
 
-        # Summarize the AI response
-        summary = assistants[call_sid].bot.summarize(suggestion)
-
-        # Save the user and AI messages in the transcript.txt file
-        user_message = {"role": "user", "content": user_text}
-        ai_message = {"role": "system", "content": summary}
-        with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "a") as f:
-            f.write(json.dumps(user_message) + "\n")
-            f.write(json.dumps(ai_message) + "\n")
+        # Save the transcription
+        requests.post(
+            url_for('save_transcription'),
+            data={
+                'call_sid': call_sid,
+                'user_text': user_text,
+                'suggestion': suggestion
+            }
+        )
 
         response = VoiceResponse()
         response.say(suggestion)
@@ -109,12 +87,35 @@ def process_speech():
 
         print("Response:", response)
         return str(response)
-    
+
     except Exception as e:
         print("Error:", e)
         response = VoiceResponse()
         response.say("Sorry, there was an error processing your request. Please try again later.")
         return str(e)
+
+@app.route("/save_transcription", methods=["POST"])
+def save_transcription():
+    try:
+        call_sid = request.form.get("call_sid")
+        user_text = request.form.get("user_text")
+        suggestion = request.form.get("suggestion")
+
+        if not os.path.exists(f"conversations/{call_sid}"):
+            os.makedirs(f"conversations/{call_sid}")
+
+        # Save the user and AI messages in the transcript.txt file
+        user_message = {"role": "user", "content": user_text}
+        ai_message = {"role": "system", "content": suggestion}
+        with open(os.path.join(f"conversations/{call_sid}", "transcript.txt"), "a") as f:
+            f.write(json.dumps(user_message) + "\n")
+            f.write(json.dumps(ai_message) + "\n")
+
+        return "success"
+
+    except Exception as e:
+        print("Error:", e)
+        return "error"
 
 if __name__ == "__main__":
     app.run(debug=True)
