@@ -1,10 +1,9 @@
-from flask import Flask, request, send_from_directory, session, send_file
+from flask import Flask, request, session, url_for
 from flask_session import Session
 from twilio.twiml.voice_response import Gather, VoiceResponse
 from transcription import Transcriber
 from bot import Bot
-import os
-import json
+import os, json, requests
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -100,6 +99,9 @@ def save_transcription():
         call_sid = request.form.get("call_sid")
         user_text = request.form.get("user_text")
         suggestion = request.form.get("suggestion")
+
+        # Summarize the conversation
+        suggestion = assistants[call_sid].bot.summarize(user_text, suggestion)
 
         if not os.path.exists(f"conversations/{call_sid}"):
             os.makedirs(f"conversations/{call_sid}")
