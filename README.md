@@ -1,4 +1,14 @@
 # AIPhone
+Bland AI built something twice as good as this - I've gone pro and joined them in their mission of making the best AI Phone integrations possible. Now it's approaching 10, 100 times better? Maybe a thousand?
+
+Anyways, [https://bland.ai] is insanely useful and we're working every single day to build the best calling systems that apps can run on. They've even got a startup program.
+
+Go there!
+
+<details>
+  <summary>The Original, personal pet project README inside</summary>
+
+# AIPhone
 
 Call (844) 598-0141 to try it out!
 
@@ -45,3 +55,4 @@ I also used other tech before it was working on the phone:
 Building AIPhone has been a valuable learning experience. I've never built something before that works over the phone! This project involved working with various technologies and tools, such as Flask, Twilio API, OpenAI GPT-4, and Heroku. The development process involved gaining a deeper understanding of speech recognition, text-to-speech, and AI language models. Additionally, it provided an opportunity to work with a deployment platform to make the application accessible to users.
 
 The AIPhone project has been an exciting journey, and I'm glad that I can work with GPT technology in it's infancy while also having the skill to integrate it into something as unique as a phone call. It's a much different environment than web development but I like challenges. Thanks for reading!
+</details>
